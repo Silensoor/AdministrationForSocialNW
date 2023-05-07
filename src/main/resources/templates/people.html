@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="FREEHTML5.CO"/>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700'
+          rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" href="/css/people.css">
+
+    <link rel="stylesheet" href="/css/cards.css">
+    <link rel="stylesheet" href="/css/all-people.css">
+    <script src="/js/respond.min.js"></script>
+
+</head>
+<body>
+
+<div id="fh5co-page">
+    <div class="fh5co-cover fh5co-cover-style-2 js-full-height" data-stellar-background-ratio="0.5" data-next="yes">
+
+        <div class="fh5co-overlay"></div>
+        <div class="fh5co-cover-text">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-push-6 col-md-6 full-height js-full-height">
+
+
+                        <div class="fh5co-cover-intro">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="text-align: center">
+                                    <h2 style="color: rgba(93,103,115,0.88);">Добавленные пользователи</h2>
+                                    <div id="table-wrapper">
+                                        <table id="table1">
+                                            <thead id="threadHead">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Email</th>
+                                                <th>FirsName</th>
+                                                <th>LastName</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbodyBody">
+                                            <tr th:each="person: ${listPerson}">
+                                                <td th:text="${person.id}"></td>
+                                                <td th:text="${person.email}"></td>
+                                                <td th:text="${person.firstName}"></td>
+                                                <td th:text="${person.lastName}"></td>
+                                                <td th:text="${person.city}"></td>
+                                                <td th:text="${person.country}"></td>
+                                                <td><a href="#" class="delete-person"
+                                                       th:data-id="${person.id}">Удалить</a></td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="margin-left: 400px;text-align: center">
+                                    <h2 style="color: rgba(93,103,115,0.88);">Все пользователи</h2>
+                                    <div id="table-wrapper2">
+                                        <table id="table2">
+                                            <thead id="threadHead2">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Email</th>
+                                                <th>FirsName</th>
+                                                <th>LastName</th>
+                                                <th>City</th>
+                                                <th>Change</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbodyBody2">
+                                            <tr th:each="person: ${allPersons}">
+                                                <td th:text="${person.id}"></td>
+                                                <td th:text="${person.email}"></td>
+                                                <td th:text="${person.firstName}"></td>
+                                                <td th:text="${person.lastName}"></td>
+                                                <td th:text="${person.city}"></td>
+                                                <td th:text="${person.country}"></td>
+                                                <td><a href="#" class="delete-person2"
+                                                       th:data-id="${person.id}">Удалить</a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <a id="backOut" href="/">В админ меню</a>
+                        <div class="parent">
+                            <a href="#" class="button open-popup">Добавить в бд с настройками</a>
+                            <a href="#" class="button open-popup2">Добавить в бд без настроек</a>
+                            <a href="#" class="button open-popup3">Добавить в бд по кол-ву с настройками</a>
+                            <a href="#" class="button open-popup4">Удалить всех добавленных</a>
+                            <a href="#" class="button open-popup5">Зарегистрировать пользователя с настройками</a>
+                            <a href="#" class="button open-popup6">Зарегистрировать рандомного пользователя</a>
+                            <a href="#" class="button open-popup7">Зарегистрировать по кол-ву</a>
+                        </div>
+                        <div class="popup-bg2">
+                            <div class="popup2">
+                                <img class="close-popup2" src="/images/close.png" alt="icon">
+                                <form id="form-output" class="form-output" method="post" th:action="@{/create}"
+                                      th:object="${person}">
+                                    <label for="field1">
+                                        <input type="checkbox" id="field1" checked>
+                                        Количество которое хотите добавить:
+                                    </label>
+                                    <input type="number" id="field1-text" th:field="*{count}" min="1" max="10000">
+                                    <br>
+                                    <label for="field2">
+                                        <input type="checkbox" id="field2" checked>
+                                        Выбрать имя?
+                                    </label>
+                                    <input type="text" id="field2-text" th:field="*{firstName}">
+                                    <br>
+                                    <label for="field3">
+                                        <input type="checkbox" id="field3" checked>
+                                        Выбрать фамилию?
+                                    </label>
+                                    <input type="text" id="field3-text" th:field="*{lastName}">
+                                    <br>
+                                    <label for="field4">
+                                        <input type="checkbox" id="field4" checked>
+                                        Выбрать номер?
+                                    </label>
+                                    <input type="tel" id="field4-text" th:field="*{phone}" placeholder="999-999-9999"
+                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <br>
+                                    <label for="field5">
+                                        <input type="checkbox" id="field5" checked>
+                                        Выбрать телеграм id?
+                                    </label>
+                                    <input type="text" id="field5-text" th:field="*{telegramId}">
+                                    <br>
+                                    <label for="field6">
+                                        <input type="checkbox" id="field6" checked>
+                                        Выбрать дату рождения?
+                                    </label>
+                                    <input type="date" id="field6-text" th:field="*{birthDate}">
+                                    <br>
+                                    <label for="field7">
+                                        <input type="checkbox" id="field7" checked>
+                                        Выбрать дату последнего онлайна?
+                                    </label>
+                                    <input type="date" id="field7-text" th:field="*{lastOnlineTime}">
+                                    <br>
+                                    <label for="field8">
+                                        <input type="checkbox" id="field8" checked>
+                                        Выбрать дату регистрации?
+                                    </label>
+                                    <input type="date" id="field8-text" th:field="*{regDate}">
+
+                                    <select class="form-poput" id="country2" name="country" form="form-output">
+                                        <option value="">Выберите город</option>
+                                        <option th:each="city : ${cities}"
+                                                th:value="${city.name}?: null"
+                                                th:text="${city.name}">
+                                        </option>
+                                    </select>
+                                    <select class="form-poput" id="city2" name="city" form="form-output">
+                                        <option value="">Выберите страну</option>
+                                        <option th:each="task : ${countries}"
+                                                th:value="${task.name}?: null"
+                                                th:text="${task.name}">
+                                        </option>
+                                    </select>
+                                    <label>
+                                        <input type="checkbox" id="field9" th:field="*{isPhoto}"/>
+                                        Добавить фото?
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" th:field="*{isDeleted}"/>
+                                        Удалить аккаунт?
+                                    </label>
+
+                                    <input type="submit" value="Добавить">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="popup-bg3">
+                            <div class="popup3">
+                                <img class="close-popup3" src="/images/close.png" alt="icon">
+                                <form id="form-poput3" class="form-poput3" method="post"
+                                      th:object="${personRegister}">
+
+                                    <input type="text" placeholder="Имя" th:field="*{firstName}"
+                                           required>
+
+                                    <input type="text" placeholder="Фамилия"
+                                           th:field="*{lastName}" required>
+
+                                    <input type="text" placeholder="Пароль" th:field="*{passwd}"
+                                           required pattern="[A-Za-z0-9А-Яа-я]{8,}">
+
+                                    <input type="email" placeholder="Email"
+                                           th:field="*{email}" required>
+
+                                    <input type="submit" value="Добавить">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="popup-bg4">
+                            <div class="popup4">
+                                <img class="close-popup4" src="/images/close.png" alt="icon">
+                                <form id="form-poput4" class="form-poput3" method="post"
+                                      th:object="${personRegister}" th:action="@{/register}">
+
+                                    <label>
+                                        Количество которое хотите добавить:
+                                    </label>
+                                    <input type="number" th:name="count" min="1" max="10000">
+
+                                    <input type="submit" value="Добавить">
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="popup-bg">
+                            <div class="popup">
+                                <img class="close-popup" src="/images/close.png" alt="icon">
+                                <form id="form-poput" class="form-poput" method="post" th:action="@{/create}"
+                                      th:object="${person}">
+
+                                    <input type="text" placeholder="Имя" th:field="*{firstName}"
+                                           required>
+
+                                    <input type="text" placeholder="Фамилия"
+                                           th:field="*{lastName}" required>
+
+                                    <i>Дата последнего захода</i>
+                                    <input type="date" placeholder="2023/05/01"
+                                           th:field="*{lastOnlineTime}" required min="1800-04-01" max="2600-04-30">
+
+                                    <i>День рождения</i>
+                                    <input type="date" placeholder="2017/06/01"
+                                           th:field="*{birthDate}" required min="1800-04-01" max="2600-04-30">
+
+                                    <input type="email" name="poput-form" placeholder="Email"
+                                           th:field="*{email}" required>
+
+                                    <i>День регистрации</i>
+                                    <input type="date" placeholder="2023/05/01"
+                                           th:field="*{regDate}" required min="1800-04-01" max="2600-04-30">
+
+                                    <input type="tel" th:field="*{phone}" placeholder="999-999-9999"
+                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+                                    <select class="form-poput" id="country" name="country" form="form-poput">
+                                        <option value="">Выберите город</option>
+                                        <option th:each="city : ${cities}"
+                                                th:value="${city.name}?: null"
+                                                th:text="${city.name}">
+                                        </option>
+                                    </select>
+                                    <select class="form-poput" id="city" name="city" form="form-poput">
+                                        <option value="">Выберите страну</option>
+                                        <option th:each="task : ${countries}"
+                                                th:value="${task.name}?: null"
+                                                th:text="${task.name}">
+                                        </option>
+                                    </select>
+                                    <i>Аккаунт удален?</i>
+                                    <input type="checkbox" th:field="*{isDeleted}"/>
+
+                                    <i>Вставить рандом фото?</i>
+                                    <input type="checkbox" th:field="*{isPhoto}"/>
+
+                                    <input type="submit" value="Добавить">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/popup.js"></script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
