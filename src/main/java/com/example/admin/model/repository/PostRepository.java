@@ -20,16 +20,13 @@ import java.util.Map;
 public class PostRepository {
 
     private final JdbcTemplate jdbcTemplate;
-    public Long getCountAllPost(){
-        return jdbcTemplate.queryForObject("select COUNT(*) from posts",Long.class);
+
+    public Long getCountAllPost() {
+        return jdbcTemplate.queryForObject("select COUNT(*) from posts", Long.class);
     }
 
     public List<Post> findAll() {
-        try {
-            return jdbcTemplate.query("SELECT * FROM posts", postRowMapper);
-        } catch (EmptyResultDataAccessException ex) {
-            return null;
-        }
+        return jdbcTemplate.query("SELECT * FROM posts", postRowMapper);
     }
 
     public List<Post> findAll(int offset, int perPage) {
@@ -78,8 +75,8 @@ public class PostRepository {
     }
 
 
-    public void deleteById(Long id){
-        jdbcTemplate.update("delete from posts where id = ?",id);
+    public void deleteById(Long id) {
+        jdbcTemplate.update("delete from posts where id = ?", id);
     }
 
     public List<Post> findPostsByUserId(Long userId, Integer offset, Integer perPage) {
@@ -95,6 +92,7 @@ public class PostRepository {
             return null;
         }
     }
+
     public List<Post> findPostsByUserId(Long userId) {
         try {
             return jdbcTemplate.query(
@@ -109,15 +107,12 @@ public class PostRepository {
 
     public List<Post> findDeletedPosts() {
         String select = "SELECT * FROM posts WHERE is_deleted = true";
-        try{
+        try {
             return jdbcTemplate.query(select, postRowMapper);
         } catch (EmptyResultDataAccessException ex) {
             return null;
         }
     }
-
-
-
 
 
     private Timestamp parseDate(Long str) {

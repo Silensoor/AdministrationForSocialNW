@@ -13,5 +13,6 @@ public interface PersonService {
     void createPerson();
     List<Person>getAllPerson();
     void delete(Long id);
-    void registerUser();
+    void registerUser(Integer count);
+    void changeUser(PersonRq personRq);
 }

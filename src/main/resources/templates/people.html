@@ -22,9 +22,7 @@
 
 
     <link rel="stylesheet" href="/css/people.css">
-
     <link rel="stylesheet" href="/css/cards.css">
-    <link rel="stylesheet" href="/css/all-people.css">
     <script src="/js/respond.min.js"></script>
 
 </head>
@@ -44,7 +42,7 @@
                         <div class="fh5co-cover-intro">
                             <div style="display: flex; justify-content: space-between;">
                                 <div style="text-align: center">
-                                    <h2 style="color: rgba(93,103,115,0.88);">Добавленные пользователи</h2>
+                                    <h2 style="color: rgba(195,223,255,0.88);">Добавленные пользователи</h2>
                                     <div id="table-wrapper">
                                         <table id="table1">
                                             <thead id="threadHead">
@@ -54,7 +52,7 @@
                                                 <th>FirsName</th>
                                                 <th>LastName</th>
                                                 <th>City</th>
-                                                <th>Country</th>
+                                                <th>Change</th>
                                                 <th>Delete</th>
                                             </tr>
                                             </thead>
@@ -65,7 +63,8 @@
                                                 <td th:text="${person.firstName}"></td>
                                                 <td th:text="${person.lastName}"></td>
                                                 <td th:text="${person.city}"></td>
-                                                <td th:text="${person.country}"></td>
+                                                <td><a href="#" class="change-person"
+                                                       th:data-id="${person.id}">Изменить</a></td>
                                                 <td><a href="#" class="delete-person"
                                                        th:data-id="${person.id}">Удалить</a></td>
 
@@ -75,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div style="margin-left: 400px;text-align: center">
-                                    <h2 style="color: rgba(93,103,115,0.88);">Все пользователи</h2>
+                                    <h2 style="color: rgba(195,223,255,0.88)">Все пользователи</h2>
                                     <div id="table-wrapper2">
                                         <table id="table2">
                                             <thead id="threadHead2">
@@ -96,7 +95,8 @@
                                                 <td th:text="${person.firstName}"></td>
                                                 <td th:text="${person.lastName}"></td>
                                                 <td th:text="${person.city}"></td>
-                                                <td th:text="${person.country}"></td>
+                                                <td><a href="#" class="change-person2" th:data-id="${person.id}">
+                                                    Изменить</a></td>
                                                 <td><a href="#" class="delete-person2"
                                                        th:data-id="${person.id}">Удалить</a></td>
                                             </tr>
@@ -123,6 +123,7 @@
                                 <img class="close-popup2" src="/images/close.png" alt="icon">
                                 <form id="form-output" class="form-output" method="post" th:action="@{/create}"
                                       th:object="${person}">
+
                                     <label for="field1">
                                         <input type="checkbox" id="field1" checked>
                                         Количество которое хотите добавить:
@@ -190,7 +191,6 @@
                                         <input type="checkbox" id="field9" th:field="*{isPhoto}"/>
                                         Добавить фото?
                                     </label>
-
                                     <label>
                                         <input type="checkbox" th:field="*{isDeleted}"/>
                                         Удалить аккаунт?
@@ -225,13 +225,95 @@
                         <div class="popup-bg4">
                             <div class="popup4">
                                 <img class="close-popup4" src="/images/close.png" alt="icon">
-                                <form id="form-poput4" class="form-poput3" method="post"
+                                <form id="form-poput4" class="form-poput4" method="post"
                                       th:object="${personRegister}" th:action="@{/register}">
 
                                     <label>
                                         Количество которое хотите добавить:
                                     </label>
                                     <input type="number" th:name="count" min="1" max="10000">
+
+                                    <input type="submit" value="Добавить">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="popup-bg5">
+                            <div class="popup5">
+                                <img class="close-popup5" src="/images/close.png" alt="icon">
+                                <form id="form-output5" class="form-output5" value="" method="post"
+                                      th:action="@{/change}"
+                                      th:object="${person}">
+                                    <label>
+                                        <input type="text" id="field18-text" th:field="*{id}" style="display:none;">
+                                    </label>
+
+                                    <label for="field11">
+                                        <input type="checkbox" id="field11" checked>
+                                        Изменить имя?
+                                    </label>
+                                    <input type="text" id="field11-text" th:field="*{firstName}">
+                                    <br>
+                                    <label for="field12">
+                                        <input type="checkbox" id="field12" checked>
+                                        Изменить фамилию?
+                                    </label>
+                                    <input type="text" id="field12-text" th:field="*{lastName}">
+                                    <br>
+                                    <label for="field13">
+                                        <input type="checkbox" id="field13" checked>
+                                        Изменить номер?
+                                    </label>
+                                    <input type="tel" id="field13-text" th:field="*{phone}" placeholder="999-999-9999"
+                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                                    <br>
+                                    <label for="field14">
+                                        <input type="checkbox" id="field14" checked>
+                                        Изменить телеграм id?
+                                    </label>
+                                    <input type="text" id="field14-text" th:field="*{telegramId}">
+                                    <br>
+                                    <label for="field15">
+                                        <input type="checkbox" id="field15" checked>
+                                        Изменить дату рождения?
+                                    </label>
+                                    <input type="date" id="field15-text" th:field="*{birthDate}">
+                                    <br>
+                                    <label for="field16">
+                                        <input type="checkbox" id="field16" checked>
+                                        Изменить дату последнего онлайна?
+                                    </label>
+                                    <input type="date" id="field16-text" th:field="*{lastOnlineTime}">
+                                    <br>
+                                    <label for="field17">
+                                        <input type="checkbox" id="field17" checked>
+                                        Изменить дату регистрации?
+                                    </label>
+                                    <input type="date" id="field17-text" th:field="*{regDate}">
+
+                                    <select class="form-poput" id="country3" name="country" form="form-output5">
+                                        <option value="">Выберите город</option>
+                                        <option th:each="city : ${cities}"
+                                                th:value="${city.name}?: null"
+                                                th:text="${city.name}">
+                                        </option>
+                                    </select>
+                                    <select class="form-poput" id="city3" name="city" form="form-output5">
+                                        <option value="">Выберите страну</option>
+                                        <option th:each="task : ${countries}"
+                                                th:value="${task.name}?: null"
+                                                th:text="${task.name}">
+                                        </option>
+                                    </select>
+                                    <label>
+                                        <input type="checkbox" th:field="*{isPhoto}"/>
+                                        Добавить фото?
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" th:field="*{isDeleted}"/>
+                                        Удалить аккаунт?
+                                    </label>
 
                                     <input type="submit" value="Добавить">
                                 </form>

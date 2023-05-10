@@ -23,6 +23,18 @@ $(document).ready(function () {
     $('.close-popup4').click(function () {
         document.querySelector('.popup-bg4').style.display = "none";
     });
+    $('.change-person').click(function (e) {
+        document.querySelector('#field18-text').value = e.target.getAttribute('data-id');
+        document.querySelector('.popup-bg5').style.display = "flex";
+    });
+    $('.change-person2').click(function (e) {
+        document.querySelector('#field18-text').value = e.target.getAttribute('data-id');
+        document.querySelector('.popup-bg5').style.display = "flex";
+    });
+    $('.close-popup5').click(function () {
+        document.querySelector('.popup-bg5').style.display = "none";
+    });
+
     $('#form-poput3').submit(function (event) {
         event.preventDefault(); // Отменить стандартное поведение формы
 
@@ -148,6 +160,7 @@ $(document).on('click', '.delete-person', function (event) {
         data: {"id": personId},
     });
 });
+
 $(document).on('click', '.delete-person2', function (event) {
     event.preventDefault();
     var personId = $(this).data('id');
@@ -166,7 +179,7 @@ $('.open-popup2').click(function () {
 
     })
 });
-const field0Text = document.getElementById('delete-person')
+
 const field1 = document.getElementById('field1');
 const field1Text = document.getElementById('field1-text');
 const field2 = document.getElementById('field2');
@@ -183,6 +196,21 @@ const field7 = document.getElementById('field7');
 const field7Text = document.getElementById('field7-text');
 const field8 = document.getElementById('field8');
 const field8Text = document.getElementById('field8-text');
+
+const field11 = document.getElementById('field11');
+const field11Text = document.getElementById('field11-text');
+const field12 = document.getElementById('field12');
+const field12Text = document.getElementById('field12-text');
+const field13 = document.getElementById('field13');
+const field13Text = document.getElementById('field13-text');
+const field14 = document.getElementById('field14');
+const field14Text = document.getElementById('field14-text');
+const field15 = document.getElementById('field15');
+const field15Text = document.getElementById('field15-text');
+const field16 = document.getElementById('field16');
+const field16Text = document.getElementById('field16-text');
+const field17 = document.getElementById('field17');
+const field17Text = document.getElementById('field17-text');
 
 
 // добавляем обработчики событий на чекбоксы
@@ -209,4 +237,25 @@ field7.addEventListener('change', function () {
 });
 field8.addEventListener('change', function () {
     field8Text.disabled = !this.checked;
+});
+field11.addEventListener('change', function () {
+    field11Text.disabled = !this.checked;
+});
+field12.addEventListener('change', function () {
+    field12Text.disabled = !this.checked;
+});
+field13.addEventListener('change', function () {
+    field13Text.disabled = !this.checked;
+});
+field14.addEventListener('change', function () {
+    field14Text.disabled = !this.checked;
+});
+field15.addEventListener('change', function () {
+    field15Text.disabled = !this.checked;
+});
+field16.addEventListener('change', function () {
+    field16Text.disabled = !this.checked;
+});
+field17.addEventListener('change', function () {
+    field17Text.disabled = !this.checked;
 });

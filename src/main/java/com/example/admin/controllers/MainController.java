@@ -5,6 +5,7 @@ import com.example.admin.dto.request.PersonRq;
 import com.example.admin.model.Person;
 import com.example.admin.services.GeolocationService;
 import com.example.admin.services.PersonService;
+import com.example.admin.services.PostService;
 import com.example.admin.services.Statistic;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class MainController {
     private final Statistic statistic;
     private final GeolocationService geolocationService;
     private final PersonService personService;
+    private final PostService postService;
 
     @GetMapping("/")
     public String getMain(Model model)  {
@@ -37,6 +39,11 @@ public class MainController {
         model.addAttribute("allPersons",personService.getAllPerson());
         model.addAttribute("personRegister",new PersonForRegistration());
         return "people.html";
+    }
+    @GetMapping("/post")
+    public String getPost(Model model){
+        model.addAttribute("posts", postService.getAllPosts());
+        return "post.html";
     }
 
 }

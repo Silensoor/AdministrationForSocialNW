@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="FREEHTML5.CO"/>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700'
+          rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" href="/css/post.css">
+
+    <link rel="stylesheet" href="/css/cards.css">
+
+    <script src="/js/respond.min.js"></script>
+
+</head>
+<body>
+
+<div id="fh5co-page">
+    <div class="fh5co-cover fh5co-cover-style-2 js-full-height" data-stellar-background-ratio="0.5" data-next="yes">
+
+        <div class="fh5co-overlay"></div>
+        <div class="fh5co-cover-text">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-push-6 col-md-6 full-height js-full-height">
+                        <a id="backOut" href="/">В админ меню</a>
+
+                        <div class="fh5co-cover-intro">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="text-align: center">
+                                    <h2 style="color: rgba(195,223,255,0.88);">Все посты</h2>
+                                    <div id="table-wrapper">
+                                        <table id="table1">
+                                            <thead id="threadHead">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Заблокирован</th>
+                                                <th>Удален</th>
+                                                <th>Текст</th>
+                                                <th>Время добавления</th>
+                                                <th>Время удаления</th>
+                                                <th>Заголовок</th>
+                                                <th>Автор ID</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tbodyBody">
+                                            <tr th:each="post: ${posts}">
+                                                <td th:text="${post.id}"></td>
+                                                <td th:text="${post.isBlocked}"></td>
+                                                <td th:text="${post.isDeleted}"></td>
+                                                <td th:text="${post.postText}"></td>
+                                                <td th:text="${post.time}"></td>
+                                                <td th:text="${post.timeDelete}"></td>
+                                                <td th:text="${post.title}"></td>
+                                                <td th:text="${post.authorId}"></td>
+
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

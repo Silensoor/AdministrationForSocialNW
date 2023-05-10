@@ -127,6 +127,18 @@ body {
     justify-content: center;
     align-items: center;
 }
+.popup-bg5 {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
 .popup {
     background-color: #ffffff;
     padding: 20px;
@@ -157,9 +169,21 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.popup5 {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .close-popup {
     position: absolute;
+    width: 30px;
+    height: 30px;
     top: 10px;
     right: 10px;
     cursor: pointer;
@@ -171,7 +195,22 @@ body {
     cursor: pointer;
     width: 30px;
     height: 30px;
-
+}
+.close-popup4 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.close-popup5 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 .form-poput {
     display: flex;
@@ -186,6 +225,12 @@ body {
     margin-top: 20px;
 }
 .form-poput4 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+.form-output5 {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -223,6 +268,17 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+.form-output5 input[type="text"],
+.form-output5 input[type="date"],
+.form-output5 input[type="email"],
+.form-output5 input[type="tel"],
+.form-output5 input[type="number"],
+.form-output5 select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
 .form-poput input[type="text"]:focus,
 .form-poput input[type="date"]:focus,
@@ -245,6 +301,14 @@ body {
 .form-poput4 input[type="email"]:focus,
 .form-poput4 input[type="tel"]:focus,
 .form-poput4 select:focus {
+    outline: none;
+    border-color: #0057ff;
+}
+.form-output5 input[type="text"]:focus,
+.form-output5 input[type="date"]:focus,
+.form-output5 input[type="email"]:focus,
+.form-output5 input[type="tel"]:focus,
+.form-output5 select:focus {
     outline: none;
     border-color: #0057ff;
 }
@@ -276,6 +340,15 @@ body {
     cursor: pointer;
     margin-top: 20px;
 }
+.form-output5 input[type="submit"] {
+    background-color: #0057ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
 .form-poput input[type="submit"]:hover {
     background-color: #003a9b;
@@ -289,6 +362,9 @@ body {
 .form-poput4 input[type="submit"]:hover {
     background-color: #003a9b;
 }
+.form-output5 input[type="submit"]:hover {
+    background-color: #003a9b;
+}
 
 .form-poput i {
     margin-top: 10px;
@@ -299,6 +375,10 @@ body {
 .form-poput4 i {
     margin-top: 10px;
 }
+.form-output5 i {
+    margin-top: 10px;
+}
+
 
 #table-wrapper {
     width: 100%;
@@ -370,22 +450,6 @@ body {
     word-wrap: break-word;
 }
 
-.close-popup {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-.close-popup4 {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
 .open-popup {
     position: fixed;
     top: 5%;
@@ -494,6 +558,21 @@ a:hover{
     list-style-type: none;
 }
 .delete-person:hover{
+    text-decoration: none;
+    color: #ffffff;
+    border-bottom-color: rgba(220, 211, 210, 0.2);
+}
+.change-person2{
+    text-decoration: none;
+    color: #5d6773;
+    list-style-type: none;
+}
+.change-person{
+    text-decoration: none;
+    color: #5d6773;
+    list-style-type: none;
+}
+.change-person:hover{
     text-decoration: none;
     color: #ffffff;
     border-bottom-color: rgba(220, 211, 210, 0.2);

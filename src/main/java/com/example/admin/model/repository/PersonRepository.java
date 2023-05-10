@@ -321,9 +321,7 @@ public class PersonRepository {
         jdbcTemplate.update("UPDATE persons SET online_status = ? WHERE id = ?", status, personId);
     }
 
-    public void updateLastOnlineTime(Long personId, Timestamp lastOnlineTime) {
-        jdbcTemplate.update("UPDATE persons SET last_online_time = ? WHERE id = ?", lastOnlineTime, personId);
-    }
+
 
     public List<Person> findRecommendedFriends(Long id, List<Person> friends, Integer offset, Integer perPage) {
         StringBuilder sql = new StringBuilder("SELECT DISTINCT p.id, p.about, p.birth_date, p.change_password_token," +
@@ -401,5 +399,49 @@ public class PersonRepository {
         } catch (EmptyResultDataAccessException ignored) {
             return null;
         }
+    }
+    public void updateFirstName(String firstName,Long id) {
+        jdbcTemplate.update("update persons set first_name = ? where id = ?",
+                firstName,id);
+    }
+    public void updateLastName(String lastName,Long id) {
+        jdbcTemplate.update("update persons set last_name = ? where id = ?",
+                lastName,id);
+    }
+    public void updatePhone(String phone,Long id) {
+        jdbcTemplate.update("update persons set phone = ? where id = ?",
+                phone,id);
+    }
+    public void updateTelegramId(Integer telegramId,Long id) {
+        jdbcTemplate.update("update persons set telegram_id = ? where id = ?",
+                telegramId,id);
+    }
+    public void updateBirthDate(Timestamp date,Long id) {
+        jdbcTemplate.update("update persons set birth_date = ? where id = ?",
+                date,id);
+    }
+    public void updateLastOnlineTime(Timestamp date,Long id) {
+        jdbcTemplate.update("update persons set last_online_time = ? where id = ?",
+                date,id);
+    }
+    public void updateRegDate(Timestamp date,Long id) {
+        jdbcTemplate.update("update persons set reg_date = ? where id = ?",
+                date,id);
+    }
+    public void updateCountry(String country,Long id) {
+        jdbcTemplate.update("update persons set country = ? where id = ?",
+                country,id);
+    }
+    public void updateCity(String city,Long id) {
+        jdbcTemplate.update("update persons set city = ? where id = ?",
+                city,id);
+    }
+    public void updatePhoto(String photo,Long id) {
+        jdbcTemplate.update("update persons set photo = ? where id = ?",
+                photo,id);
+    }
+    public void updateDeleted(Boolean deleted,Long id) {
+        jdbcTemplate.update("update persons set is_deleted = ? where id = ?",
+                deleted,id);
     }
 }

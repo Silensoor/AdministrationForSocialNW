@@ -7,9 +7,16 @@ import com.example.admin.model.repository.*;
 import com.example.admin.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.RandomStringUtils;
+
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.SecureRandom;
 import java.sql.Timestamp;
 
@@ -19,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -55,7 +63,7 @@ public class PersonServiceImpl implements PersonService {
 
                 for (int i = 0; i < personRq.getCount(); i++) {
                     Person person = PersonMapper.INSTANCE.toDTO(getPersonRqByDate(personRq));
-                    person.setEmail(generateString(30) + "@mail.ru");
+                    person.setEmail(generateRandomEmail());
                     Long id = personRepository.save(person);
                     personSettingRepository.createPersonSetting(id);
                     person.setId(id);
@@ -98,8 +106,6 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void delete(Long id) {
         try {
-
-
             if (id == null) {
                 for (Person person : listPerson) {
                     deleteAllPostTags(person);
@@ -116,7 +122,156 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void registerUser() {
+    public void registerUser(Integer countCircle) {
+        try {
+
+
+            for (int i = 0; i < countCircle; i++) {
+                HttpClient client = HttpClient.newHttpClient();
+
+                // Отправка GET-запроса и получение ответа
+                HttpRequest getRequest = HttpRequest.newBuilder()
+                        .uri(new URI("http://localhost:8086/api/v1/auth/captcha"))
+                        .header("Content-Type", "application/json")
+                        .build();
+                HttpResponse<String> getResponse = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
+
+                // Обработка JSON-ответа
+                int count = Integer.parseInt(getResponse.body().replaceAll("\"", "").split(":")[1].split(",")[0]);
+
+
+                // Генерация случайных данных
+                String email = generateRandomEmail();
+                String firstName = generateFirstName();
+                String lastName = generateLastName();
+                Integer password = generatePassword();
+
+                // Создание JSON-объекта с данными для POST-запроса
+                String json = String.format("{\"firstName\": \"%s\", \"lastName\": \"%s\", \"passwd1\": \"%s\", \"passwd2\": \"%s\", \"email\": \"%s\", \"code\": %d, \"codeSecret\": %d}",
+                        firstName, lastName, password, password, email, count, count);
+
+                // Отправка POST-запроса
+                HttpRequest postRequest = HttpRequest.newBuilder()
+                        .uri(new URI("http://localhost:8086/api/v1/account/register"))
+                        .POST(HttpRequest.BodyPublishers.ofString(json))
+                        .header("Content-Type", "application/json")
+                        .build();
+                HttpResponse<String> postResponse = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+
+                // Обработка ответа
+                if (postResponse.statusCode() == 200) {
+                    System.out.println("Регистрация прошла успешно!");
+                } else {
+                    System.out.println("Произошла ошибка при регистрации.");
+                }
+            }
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+        }
+    }
+
+    @Override
+    public void changeUser(PersonRq personRq) {
+        Long id = personRq.getId();
+        for (Person person : listPerson) {
+            if (person.getId().equals(id)) {
+                if (personRq.getFirstName() != null && !personRq.getFirstName().equals("")) {
+                    person.setFirstName(personRq.getFirstName());
+                    personRepository.updateFirstName(personRq.getFirstName(), id);
+                }
+                if (personRq.getLastName() != null && !personRq.getLastName().equals("")) {
+                    person.setLastName(personRq.getLastName());
+                    personRepository.updateLastName(personRq.getLastName(), id);
+                }
+                if (personRq.getPhone() != null && !personRq.getPhone().equals("")) {
+                    person.setPhone(personRq.getPhone());
+                    personRepository.updatePhone(personRq.getPhone(), id);
+                }
+                if (personRq.getTelegramId() != null) {
+                    person.setTelegramId(Long.valueOf(personRq.getTelegramId()));
+                    personRepository.updateTelegramId(personRq.getTelegramId(), id);
+                }
+                if (personRq.getBirthDate() != null && !personRq.getBirthDate().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getBirthDate()));
+                    person.setBirthDate(dateByString);
+                    personRepository.updateBirthDate(dateByString, id);
+                }
+                if (personRq.getLastOnlineTime() != null && !personRq.getLastOnlineTime().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getLastOnlineTime()));
+                    person.setLastOnlineTime(dateByString);
+                    personRepository.updateLastOnlineTime(dateByString, id);
+                }
+                if (personRq.getRegDate() != null && !personRq.getRegDate().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getRegDate()));
+                    person.setRegDate(dateByString);
+                    personRepository.updateRegDate(dateByString, id);
+                }
+                if (personRq.getCountry() != null && !personRq.getCountry().equals("")) {
+                    person.setCountry(person.getCountry());
+                    personRepository.updateCountry(personRq.getCountry(), id);
+                }
+                if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+                    person.setCity(person.getCity());
+                    personRepository.updateCity(personRq.getCity(), id);
+                }
+                if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+                    person.setCity(personRq.getCity());
+                    personRepository.updateCity(personRq.getCity(), id);
+                }
+                String photo;
+                if (personRq.getIsPhoto()) {
+                    photo = "https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif";
+                }else {
+                    photo = generateString(5);
+                }
+                person.setPhoto(photo);
+                personRepository.updatePhoto(photo, id);
+                person.setIsDeleted(personRq.getIsDeleted());
+                personRepository.updateDeleted(personRq.getIsDeleted(), id);
+            } else {
+                if (personRq.getFirstName() != null && !personRq.getFirstName().equals("")) {
+                    personRepository.updateFirstName(personRq.getFirstName(), id);
+                }
+                if (personRq.getLastName() != null && !personRq.getLastName().equals("")) {
+                    personRepository.updateLastName(personRq.getLastName(), id);
+                }
+                if (personRq.getPhone() != null && !personRq.getPhone().equals("")) {
+                    personRepository.updatePhone(personRq.getPhone(), id);
+                }
+                if (personRq.getTelegramId() != null) {
+                    personRepository.updateTelegramId(personRq.getTelegramId(), id);
+                }
+                if (personRq.getBirthDate() != null && !personRq.getBirthDate().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getBirthDate()));
+                    personRepository.updateBirthDate(dateByString, id);
+                }
+                if (personRq.getLastOnlineTime() != null && !personRq.getLastOnlineTime().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getLastOnlineTime()));
+                    personRepository.updateLastOnlineTime(dateByString, id);
+                }
+                if (personRq.getRegDate() != null && !personRq.getRegDate().equals("")) {
+                    Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getRegDate()));
+                    personRepository.updateRegDate(dateByString, id);
+                }
+                if (personRq.getCountry() != null && !personRq.getCountry().equals("")) {
+                    personRepository.updateCountry(personRq.getCountry(), id);
+                }
+                if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+                    personRepository.updateCity(personRq.getCity(), id);
+                }
+                if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+                    personRepository.updateCity(personRq.getCity(), id);
+                }
+                String photo;
+                if (personRq.getIsPhoto()) {
+                    photo = "https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif";
+                }else {
+                    photo = generateString(5);
+                }
+                personRepository.updatePhoto(photo, id);
+                personRepository.updateDeleted(personRq.getIsDeleted(), id);
+            }
+        }
 
     }
 
@@ -128,7 +283,7 @@ public class PersonServiceImpl implements PersonService {
     private Person getPersonNew() {
         Person person = setInfo(new Person());
         person.setBirthDate(Timestamp.from(Instant.now()));
-        person.setEmail(generateString(30) + "@mail.ru");
+        person.setEmail(generateRandomEmail());
         person.setFirstName(generateFirstName());
         person.setIsDeleted(false);
         person.setLastName(generateLastName());
@@ -152,7 +307,7 @@ public class PersonServiceImpl implements PersonService {
         Person dto = PersonMapper.INSTANCE.toDTO(personRqByDate);
 
         if (dto.getEmail() == null) {
-            dto.setEmail(generateString(30) + "@mail.ru");
+            dto.setEmail(generateRandomEmail());
         }
         if (personRq.getIsPhoto()) {
             dto.setPhoto("https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif");
@@ -212,6 +367,7 @@ public class PersonServiceImpl implements PersonService {
         return list.get(random.nextInt(list.size()));
     }
 
+
     private PersonRq getPersonRqByDate(PersonRq personRq) {
         if (personRq.getRegDate() == null || personRq.getRegDate().equals("")) {
             personRq.setRegDate(null);
@@ -242,6 +398,20 @@ public class PersonServiceImpl implements PersonService {
     private Integer generateInt() {
         return (int) (Math.random() * (99999 - 10000) + 10000);
     }
+
+    private String generateRandomEmail() {
+        String[] providers = {"gmail.com", "yahoo.com", "outlook.com", "mail.ru", "yandex.ru"};
+        Random random = new Random();
+        String text = generateString(30);
+        String provider = providers[random.nextInt(providers.length)];
+        return text + "@" + provider;
+    }
+
+    public int generatePassword() {
+        Random random = new Random();
+        return 10000000 + random.nextInt(90000000);
+    }
+
 
     private void deleteAllPostTags(Person person) {
         List<Post> posts = deletePersonSettingsReturnPosts(person);
