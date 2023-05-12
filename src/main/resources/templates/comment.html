@@ -21,7 +21,7 @@
           rel='stylesheet' type='text/css'>
 
 
-    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/comment.css">
 
     <link rel="stylesheet" href="/css/cards.css">
 
@@ -43,7 +43,7 @@
 
                         <div class="fh5co-cover-intro">
                             <div class="parent" style="margin-left: 1200px;margin-bottom: 20px" >
-                                <form action="/find" method="post">
+                                <form action="/find1" method="post">
                                     <label for="textInput">Введите текст:</label>
                                     <input type="text" id="textInput" name="text">
                                     <button type="submit">Найти</button>
@@ -52,34 +52,34 @@
                             </div>
                             <div style="display: flex; justify-content: space-between;">
                                 <div style="text-align: center">
-                                    <h2 style="color: rgba(195,223,255,0.88);">Все посты</h2>
+                                    <h2 style="color: rgba(195,223,255,0.88);">Все комменты</h2>
                                     <div id="table-wrapper">
                                         <table id="table1">
                                             <thead id="threadHead">
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Текст</th>
                                                 <th>IsBlock</th>
                                                 <th>IsDelete</th>
-                                                <th>Текст</th>
                                                 <th>Время добавления</th>
-                                                <th>Время удаления</th>
-                                                <th>Заголовок</th>
+                                                <th>ID родителя</th>
                                                 <th>Автор ID</th>
+                                                <th>Пост ID</th>
                                                 <th>Delete</th>
                                             </tr>
                                             </thead>
                                             <tbody id="tbodyBody">
-                                            <tr th:each="post: ${posts}">
-                                                <td th:text="${post.id}"></td>
-                                                <td th:text="${post.isBlocked}"></td>
-                                                <td th:text="${post.isDeleted}"></td>
-                                                <td th:text="${post.postText}"></td>
-                                                <td th:text="${post.time}"></td>
-                                                <td th:text="${post.timeDelete}"></td>
-                                                <td th:text="${post.title}"></td>
-                                                <td th:text="${post.authorId}"></td>
-                                                <td><a href="#" class="delete-person"
-                                                       th:data-id="${post.id}">Удалить</a></td>
+                                            <tr th:each="comment: ${comments}">
+                                                <td th:text="${comment.id}"></td>
+                                                <td th:text="${comment.commentText}"></td>
+                                                <td th:text="${comment.isBlocked}"></td>
+                                                <td th:text="${comment.isDeleted}"></td>
+                                                <td th:text="${comment.time}"></td>
+                                                <td th:text="${comment.parentId}"></td>
+                                                <td th:text="${comment.authorId}"></td>
+                                                <td th:text="${comment.postId}"></td>
+                                                <td><a href="#" class="delete-comment"
+                                                       th:data-id="${comment.id}">Удалить</a></td>
 
                                             </tr>
                                             </tbody>
@@ -93,27 +93,27 @@
                                             <thead id="threadHead2">
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Текст</th>
                                                 <th>IsBlock</th>
                                                 <th>IsDelete</th>
-                                                <th>Текст</th>
                                                 <th>Время добавления</th>
-                                                <th>Время удаления</th>
-                                                <th>Заголовок</th>
+                                                <th>ID родителя</th>
                                                 <th>Автор ID</th>
+                                                <th>Пост ID</th>
                                                 <th>Delete</th>
                                             </tr>
                                             </thead>
                                             <tbody id="tbodyBody2">
-                                            <tr th:each="find: ${postFind}">
+                                            <tr th:each="find: ${commentsFind}">
                                                 <td th:text="${find.id}"></td>
+                                                <td th:text="${find.commentText}"></td>
                                                 <td th:text="${find.isBlocked}"></td>
                                                 <td th:text="${find.isDeleted}"></td>
-                                                <td th:text="${find.postText}"></td>
                                                 <td th:text="${find.time}"></td>
-                                                <td th:text="${find.timeDelete}"></td>
-                                                <td th:text="${find.title}"></td>
+                                                <td th:text="${find.parentId}"></td>
                                                 <td th:text="${find.authorId}"></td>
-                                                <td><a href="#" class="delete-person2"
+                                                <td th:text="${find.postId}"></td>
+                                                <td><a href="#" class="delete-comment2"
                                                        th:data-id2="${find.id}">Удалить</a></td>
                                             </tr>
                                             </tbody>
@@ -132,7 +132,7 @@
     </div>
 </div>
 <script src="/js/jquery.min.js"></script>
-<script src="/js/post.js"></script>
+<script src="/js/comment.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

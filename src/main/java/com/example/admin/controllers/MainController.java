@@ -3,10 +3,7 @@ package com.example.admin.controllers;
 import com.example.admin.dto.request.PersonForRegistration;
 import com.example.admin.dto.request.PersonRq;
 import com.example.admin.model.Person;
-import com.example.admin.services.GeolocationService;
-import com.example.admin.services.PersonService;
-import com.example.admin.services.PostService;
-import com.example.admin.services.Statistic;
+import com.example.admin.services.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +21,7 @@ public class MainController {
     private final GeolocationService geolocationService;
     private final PersonService personService;
     private final PostService postService;
+    private final CommentService commentService;
 
     @GetMapping("/")
     public String getMain(Model model)  {
@@ -44,6 +42,11 @@ public class MainController {
     public String getPost(Model model){
         model.addAttribute("posts", postService.getAllPosts());
         return "post.html";
+    }
+    @GetMapping("/comment")
+    public String getComment(Model model){
+        model.addAttribute("comments",commentService.findAll());
+        return "comment.html";
     }
 
 }

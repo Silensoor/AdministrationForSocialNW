@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostService {
     List<Post> getAllPosts();
+    void deletePost(Long id);
+    List<Post> findPost(String text);
 }

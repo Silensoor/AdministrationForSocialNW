@@ -20,6 +20,10 @@ public class CommentRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    public List<Comment> findAll(){
+        return jdbcTemplate.query("select * from post_comments",commentRowMapper);
+    }
+
     public List<Comment> findByPostId(Long postId) {
         return jdbcTemplate.query("SELECT * FROM post_comments WHERE post_id = ?", commentRowMapper, postId);
     }
@@ -91,6 +95,9 @@ public class CommentRepository {
     public void delete(Comment comment) {
         String delete = "DELETE FROM post_comments WHERE id = " + comment.getId();
         jdbcTemplate.execute(delete);
+    }
+    public void deleteById(Long id){
+        jdbcTemplate.update("delete from post_comments where id = ?",id);
     }
 
     private final RowMapper<Comment> commentRowMapper = (rs, rowNum) -> {

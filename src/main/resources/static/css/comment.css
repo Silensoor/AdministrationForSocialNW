@@ -83,22 +83,22 @@ a:hover{
     color: #ffffff;
     border-bottom-color: rgba(220, 211, 210, 0.2);
 }
-.delete-person{
+.delete-comment{
     text-decoration: none;
     color: #5d6773;
     list-style-type: none;
 }
-.delete-person:hover{
+.delete-comment:hover{
     text-decoration: none;
     color: #ffffff;
     border-bottom-color: rgba(220, 211, 210, 0.2);
 }
-.delete-person2{
+.delete-comment2{
     text-decoration: none;
     color: #5d6773;
     list-style-type: none;
 }
-.delete-person2:hover{
+.delete-comment2:hover{
     text-decoration: none;
     color: #ffffff;
     border-bottom-color: rgba(220, 211, 210, 0.2);

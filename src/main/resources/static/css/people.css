@@ -394,7 +394,6 @@ body {
      max-height: 500px;
      overflow: auto; /* добавляем скролл, если содержимое таблицы выходит за пределы обертки */
      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-
  }
 
 #threadHead {
