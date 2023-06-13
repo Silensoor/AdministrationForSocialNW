@@ -8,6 +8,6 @@ spring:
     enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 198855
-    url: jdbc:postgresql://localhost:5432/postgres
+    username: snuser
+    password: snpassword
+    url: jdbc:postgresql://81.177.6.228:5432/socialnet

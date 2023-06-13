@@ -53,10 +53,10 @@ body {
 
 }
 #tbodyBody tr:hover {
-    background-color: #ccc;
+    background-color: rgba(68,80,96,0.88);
 }
 #tbodyBody2 tr:hover {
-    background-color: #ccc;
+    background-color: rgba(68,80,96,0.88);
 }
 
 
@@ -85,7 +85,7 @@ a:hover{
 }
 .delete-comment{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .delete-comment:hover{
@@ -95,11 +95,14 @@ a:hover{
 }
 .delete-comment2{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .delete-comment2:hover{
     text-decoration: none;
     color: #ffffff;
     border-bottom-color: rgba(220, 211, 210, 0.2);
+}
+td{
+    color: rgba(195,223,255,0.88);
 }

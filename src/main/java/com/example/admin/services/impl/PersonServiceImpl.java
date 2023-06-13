@@ -173,6 +173,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void changeUser(PersonRq personRq) {
         Long id = personRq.getId();
+
         for (Person person : listPerson) {
             if (person.getId().equals(id)) {
                 if (personRq.getFirstName() != null && !personRq.getFirstName().equals("")) {
@@ -221,7 +222,7 @@ public class PersonServiceImpl implements PersonService {
                 String photo;
                 if (personRq.getIsPhoto()) {
                     photo = "https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif";
-                }else {
+                } else {
                     photo = generateString(5);
                 }
                 person.setPhoto(photo);
@@ -265,13 +266,55 @@ public class PersonServiceImpl implements PersonService {
                 String photo;
                 if (personRq.getIsPhoto()) {
                     photo = "https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif";
-                }else {
+                } else {
                     photo = generateString(5);
                 }
                 personRepository.updatePhoto(photo, id);
                 personRepository.updateDeleted(personRq.getIsDeleted(), id);
             }
         }
+        if (personRq.getFirstName() != null && !personRq.getFirstName().equals("")) {
+            personRepository.updateFirstName(personRq.getFirstName(), id);
+        }
+        if (personRq.getLastName() != null && !personRq.getLastName().equals("")) {
+            personRepository.updateLastName(personRq.getLastName(), id);
+        }
+        if (personRq.getPhone() != null && !personRq.getPhone().equals("")) {
+            personRepository.updatePhone(personRq.getPhone(), id);
+        }
+        if (personRq.getTelegramId() != null) {
+            personRepository.updateTelegramId(personRq.getTelegramId(), id);
+        }
+        if (personRq.getBirthDate() != null && !personRq.getBirthDate().equals("")) {
+            Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getBirthDate()));
+            personRepository.updateBirthDate(dateByString, id);
+        }
+        if (personRq.getLastOnlineTime() != null && !personRq.getLastOnlineTime().equals("")) {
+            Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getLastOnlineTime()));
+            personRepository.updateLastOnlineTime(dateByString, id);
+        }
+        if (personRq.getRegDate() != null && !personRq.getRegDate().equals("")) {
+            Timestamp dateByString = Timestamp.valueOf(getDateByString(personRq.getRegDate()));
+            personRepository.updateRegDate(dateByString, id);
+        }
+        if (personRq.getCountry() != null && !personRq.getCountry().equals("")) {
+            personRepository.updateCountry(personRq.getCountry(), id);
+        }
+        if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+            personRepository.updateCity(personRq.getCity(), id);
+        }
+        if (personRq.getCity() != null && !personRq.getCity().equals("")) {
+            personRepository.updateCity(personRq.getCity(), id);
+        }
+        String photo;
+        if (personRq.getIsPhoto()) {
+            photo = "https://storage.yandexcloud.net/socnet37/users_photo/73f6bf23-78a0-4a8e-b657-db365df178dd/123.gif";
+        } else {
+            photo = generateString(5);
+        }
+        personRepository.updatePhoto(photo, id);
+        personRepository.updateDeleted(personRq.getIsDeleted(), id);
+
 
     }
 
@@ -446,7 +489,7 @@ public class PersonServiceImpl implements PersonService {
 
 
         }
-
+        personSettingRepository.deleteSettingByPersonId(person.getId());
         personRepository.deleteUser(person.getEmail());
     }
 }

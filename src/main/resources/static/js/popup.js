@@ -39,10 +39,13 @@ $(document).ready(function () {
         event.preventDefault(); // Отменить стандартное поведение формы
 
 
-        fetch('http://localhost:8086/api/v1/auth/captcha', {
+        fetch('http://81.177.6.228:8086/api/v1/auth/captcha', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Sec-Fetch-Dest': undefined,
+                'Sec-Fetch-Mode': undefined,
+                'Sec-Fetch-Site': undefined
             }
         }).then(response => response.json())
             .then(data => {
@@ -58,7 +61,7 @@ $(document).ready(function () {
                     codeSecret: code
                 };
 
-                fetch('http://localhost:8086/api/v1/account/register', {
+                fetch('http://81.177.6.228:8086/api/v1/account/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -81,10 +84,13 @@ $(document).ready(function () {
 
     $('.open-popup6').click(function () {
 
-        fetch('http://localhost:8086/api/v1/auth/captcha', {
+        fetch('http://81.177.6.228:8086/api/v1/auth/captcha', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Sec-Fetch-Dest': undefined,
+                'Sec-Fetch-Mode': undefined,
+                'Sec-Fetch-Site': undefined
             }
         }).then(response => response.json())
             .then(data => {
@@ -107,7 +113,7 @@ $(document).ready(function () {
                     codeSecret: code
                 };
 
-                fetch('http://localhost:8086/api/v1/account/register', {
+                fetch('http://81.177.6.228:8086/api/v1/account/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

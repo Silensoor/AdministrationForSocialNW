@@ -414,10 +414,10 @@ body {
 }
 
 #tbodyBody tr:hover {
-    background-color: #ccc;
+    background-color: rgba(68,80,96,0.88);
 }
 #tbodyBody2 tr:hover {
-    background-color: #ccc;
+    background-color: rgba(68,80,96,0.88);
 }
 
 #tbodyBody tr {
@@ -439,14 +439,19 @@ body {
 }
 
 #table1 th, td {
+
     padding: 8px;
     text-align: center;
     word-wrap: break-word;
 }
 #table2 th, td {
+
     padding: 8px;
     text-align: center;
     word-wrap: break-word;
+}
+td{
+    color: rgba(195,223,255,0.88);
 }
 
 .open-popup {
@@ -553,7 +558,7 @@ a:hover{
 }
 .delete-person{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .delete-person:hover{
@@ -563,12 +568,12 @@ a:hover{
 }
 .change-person2{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .change-person{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .change-person:hover{
@@ -578,7 +583,7 @@ a:hover{
 }
 .delete-person2{
     text-decoration: none;
-    color: #5d6773;
+    color: #618cb0;
     list-style-type: none;
 }
 .delete-person2:hover{
